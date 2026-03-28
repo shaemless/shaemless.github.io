@@ -1,0 +1,11 @@
+title: Shaemless
+description: AE-E --- RIDE DEEP
+baseurl: ""
+url: "https://shaemless.github.io"
+
+collections:
+  events:
+    output: true
+    permalink: /events/:path/
+
+markdown: kramdown
