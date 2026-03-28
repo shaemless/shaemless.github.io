@@ -105,12 +105,16 @@ body {
   padding-bottom: 20px;
   cursor: pointer;
   writing-mode: vertical-rl;
-  transform: rotate(180deg);
   font-family: 'Oswald', sans-serif;
   font-size: 18px;
   letter-spacing: 3px;
   border-right: 1px solid black;
   transition: all 0.3s ease;
+}
+
+.label span {
+  display: inline-block;
+  transform: rotate(180deg);
 }
 
 h1 {
