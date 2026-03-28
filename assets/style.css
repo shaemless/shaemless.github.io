@@ -26,11 +26,11 @@ body {
   width: calc(100vw - 240px);
 }
 
-/* Vertical bar */
+/* Vertical bar (default white) */
 .label {
   width: 80px;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,38 +38,35 @@ body {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-weight: bold;
-  border-right: 1px solid white;
-}
-
-/* Alternate colors */
-.panel:nth-child(even) .label {
-  background: white;
-  color: black;
   border-right: 1px solid black;
+  transition: all 0.3s ease;
 }
 
-/* Content */
+/* Hover = invert */
+.label:hover {
+  background: black;
+  color: white;
+}
+
+/* Active panel = invert */
+.panel.active .label {
+  background: black;
+  color: white;
+}
+
+/* Content area */
 .content {
   flex: 1;
   padding: 40px;
   overflow-y: auto;
   display: none;
+  background: black;
+  color: white;
 }
 
 /* Show content when active */
 .panel.active .content {
   display: block;
-}
-
-/* Alternate content colors */
-.panel:nth-child(even) .content {
-  background: black;
-  color: white;
-}
-
-.panel:nth-child(odd) .content {
-  background: white;
-  color: black;
 }
 
 /* Buttons */
