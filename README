@@ -1,0 +1,15 @@
+shaemless.github.io/
+│
+├── _config.yml
+├── index.html
+├── news.md
+├── contact.md
+├── _posts/
+│   └── 2026-03-28-first-post.md
+├── _events/
+│   └── 2026-04-10-event-name.md
+├── _includes/
+│   ├── instagram.html
+│   └── contact-form.html
+├── assets/
+│   └── style.css
