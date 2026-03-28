@@ -100,8 +100,9 @@ body {
   background: white;
   color: black;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 20px;
   cursor: pointer;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
