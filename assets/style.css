@@ -85,3 +85,53 @@ body {
   border-bottom: 1px solid;
   padding-bottom: 10px;
 }
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+
+/* Vertical labels */
+.label {
+  width: 80px;
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  border-right: 1px solid black;
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h1, h2, .label {
+  text-transform: uppercase;
+}
+
+p {
+  text-transform: none;
+}
