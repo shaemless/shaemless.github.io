@@ -7,31 +7,38 @@
 </head>
 
 <body>
-  <div class="columns">
 
-    <!-- Column 1: Menu -->
-    <div class="column black">
-      <h1>Shaemless</h1>
-      <nav>
-        <a href="/webshop.html">Webshop</a>
-        <a href="#instagram">Instagram</a>
-        <a href="#events">Events</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<div class="accordion">
 
-      <p>
-        Post-punk events, concerts, DJs and underground culture.
-      </p>
+  <!-- SHAEMLESS -->
+  <div class="panel active">
+    <div class="label" onclick="openPanel(0)">
+      <span>SHAEMLESS</span>
     </div>
+    <div class="content">
+      <h1>Shaemless</h1>
+      <p>Post-punk events, concerts, DJs and underground culture.</p>
+      <a href="/webshop.html" class="button">Webshop</a>
+    </div>
+  </div>
 
-    <!-- Column 2: Instagram -->
-    <div class="column white" id="instagram">
+  <!-- INSTAGRAM -->
+  <div class="panel">
+    <div class="label" onclick="openPanel(1)">
+      <span>INSTAGRAM</span>
+    </div>
+    <div class="content">
       <h2>Instagram</h2>
       {% include instagram.html %}
     </div>
+  </div>
 
-    <!-- Column 3: Events -->
-    <div class="column black" id="events">
+  <!-- EVENTS -->
+  <div class="panel">
+    <div class="label" onclick="openPanel(2)">
+      <span>EVENTS</span>
+    </div>
+    <div class="content">
       <h2>Events</h2>
 
       {% for event in site.events %}
@@ -45,13 +52,33 @@
       {% endfor %}
 
     </div>
+  </div>
 
-    <!-- Column 4: Contact -->
-    <div class="column white" id="contact">
+  <!-- CONTACT -->
+  <div class="panel">
+    <div class="label" onclick="openPanel(3)">
+      <span>CONTACT</span>
+    </div>
+    <div class="content">
       <h2>Contact</h2>
       {% include contact-form.html %}
     </div>
-
   </div>
+
+</div>
+
+<script>
+function openPanel(index) {
+  let panels = document.querySelectorAll(".panel");
+  panels.forEach((panel, i) => {
+    if (i === index) {
+      panel.classList.add("active");
+    } else {
+      panel.classList.remove("active");
+    }
+  });
+}
+</script>
+
 </body>
 </html>
