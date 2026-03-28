@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Shaemless</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <h1>Shaemless</h1>
+    <ul>
+      <li><a href="#news">News</a></li>
+      <li><a href="#instagram">Instagram</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+
+    <section id="news">
+      <h2>News</h2>
+      <ul>
+        {% for post in site.posts %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            <small>{{ post.date | date: "%d %b %Y" }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section id="instagram">
+      <h2>Instagram</h2>
+      {% include instagram.html %}
+    </section>
+
+    <section id="events">
+      <h2>Events</h2>
+      <ul>
+        {% for event in site.events %}
+          <li>
+            <strong>{{ event.title }}</strong>
+            — {{ event.date | date: "%d %b %Y" }}
+            <p>{{ event.location }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      {% include contact-form.html %}
+    </section>
+
+  </div>
+</body>
+</html>
