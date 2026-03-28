@@ -7,48 +7,50 @@
 </head>
 
 <body>
-  <div class="sidebar">
-    <h1>Shaemless</h1>
-    <ul>
-      <li><a href="/webshop.html">Webshop</a></li>
-      <li><a href="#instagram">Instagram</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
+  <div class="columns">
 
-  <div class="content">
+    <!-- Column 1: Menu -->
+    <div class="column black">
+      <h1>Shaemless</h1>
+      <nav>
+        <a href="/webshop.html">Webshop</a>
+        <a href="#instagram">Instagram</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-    <section id="webshop">
-      <h2>Webshop</h2>
       <p>
-        Visit our webshop for merchandise, records and tickets.
+        Post-punk events, concerts, DJs and underground culture.
       </p>
-      <a href="/webshop.html" class="button">Go to Webshop</a>
-    </section>
+    </div>
 
-    <section id="instagram">
+    <!-- Column 2: Instagram -->
+    <div class="column white" id="instagram">
       <h2>Instagram</h2>
       {% include instagram.html %}
-    </section>
+    </div>
 
-    <section id="events">
+    <!-- Column 3: Events -->
+    <div class="column black" id="events">
       <h2>Events</h2>
-      <ul>
-        {% for event in site.events %}
-          <li>
-            <strong>{{ event.title }}</strong>
-            — {{ event.date | date: "%d %b %Y" }}
-            <p>{{ event.location }}</p>
-          </li>
-        {% endfor %}
-      </ul>
-    </section>
 
-    <section id="contact">
+      {% for event in site.events %}
+        <div class="event">
+          <p>
+            <strong>{{ event.title }}</strong><br>
+            {{ event.date | date: "%d %b %Y" }}<br>
+            {{ event.location }}
+          </p>
+        </div>
+      {% endfor %}
+
+    </div>
+
+    <!-- Column 4: Contact -->
+    <div class="column white" id="contact">
       <h2>Contact</h2>
       {% include contact-form.html %}
-    </section>
+    </div>
 
   </div>
 </body>
