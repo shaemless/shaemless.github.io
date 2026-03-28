@@ -3,61 +3,79 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  overflow-x: scroll;
 }
 
-.columns {
+/* Accordion container */
+.accordion {
   display: flex;
-  width: max-content;
   height: 100vh;
-  scroll-snap-type: x mandatory;
+  width: 100vw;
+  overflow: hidden;
 }
 
-.column {
-  flex: 0 0 25vw;
-  height: 100vh;
-  padding: 30px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  scroll-snap-align: start;
+/* Each panel */
+.panel {
+  display: flex;
+  height: 100%;
+  width: 80px;
+  transition: width 0.5s;
 }
 
-/* alternating colors */
-.black {
+/* Expanded panel */
+.panel.active {
+  width: calc(100vw - 240px);
+}
+
+/* Vertical label bar */
+.label {
+  width: 80px;
   background: black;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: bold;
+  border-right: 1px solid white;
 }
 
-.white {
+/* Alternate colors */
+.panel:nth-child(even) .label {
+  background: white;
+  color: black;
+  border-right: 1px solid black;
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
   background: white;
   color: black;
 }
 
-/* links */
-a {
-  color: inherit;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 15px;
-  font-weight: bold;
+/* Alternate content colors */
+.panel:nth-child(even) .content {
+  background: black;
+  color: white;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-/* events */
-.event {
-  margin-bottom: 30px;
-  border-bottom: 1px solid;
-  padding-bottom: 10px;
-}
-
-/* buttons */
+/* Buttons */
 .button {
   display: inline-block;
   padding: 10px 15px;
   border: 1px solid;
   text-decoration: none;
   margin-top: 10px;
+  color: inherit;
+}
+
+/* Events */
+.event {
+  margin-bottom: 30px;
+  border-bottom: 1px solid;
+  padding-bottom: 10px;
 }
