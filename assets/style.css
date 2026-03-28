@@ -34,7 +34,7 @@ body {
   display: flex;
   align-items: center;        /* keep horizontal centering correct */
   justify-content: center;
-  padding-top: 200px;         /* 👈 pushes text downward */
+  padding-top: 400px;         /* 👈 pushes text downward */
   cursor: pointer;
   writing-mode: vertical-rl;
   transform: rotate(180deg);  /* 👈 keep rotation here */
