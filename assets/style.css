@@ -1,3 +1,4 @@
+/* Base */
 body {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
@@ -26,53 +27,86 @@ body {
   width: calc(100vw - 240px);
 }
 
-/* Vertical bar (LABEL) */
+/* Hide label only when first panel is open */
+.panel:first-child .label {
+  transition: all 0.5s ease;
+}
+
+.panel:first-child.active .label {
+  transform: translateX(-80px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   LABEL (FIXED VERSION)
+   ========================= */
+
 .label {
   width: 80px;
   background: white;
   color: black;
-  display: flex;
-  align-items: center;       
-  justify-content: center;
-  padding-bottom: 0px;       
+  position: relative;
   cursor: pointer;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg); 
-  font-family: 'Oswald', sans-serif;
-  font-size: 18px;
-  letter-spacing: 3px;
-  border-right: 1px solid black;
   transition: all 0.3s ease;
 }
 
-/* Hover = invert */
+/* Vertical text */
+.label span {
+  position: absolute;
+  bottom: 10px;                         /* 👈 distance from bottom */
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  font-family: 'Oswald', sans-serif;
+  font-size: 70px;
+  font-weight: 1000; 
+  letter-spacing: 0px;
+}
+
+/* Hover + active states */
 .label:hover {
   background: black;
-  color: white;
 }
 
-/* Active panel = invert */
 .panel.active .label {
   background: black;
+}
+
+.label:hover span,
+.panel.active .label span {
   color: white;
 }
 
-/* Content area */
+/* =========================
+   CONTENT
+   ========================= */
+
 .content {
   flex: 1;
   padding: 40px;
   overflow-y: auto;
   display: none;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
 }
 
 /* Show content when active */
 .panel.active .content {
   display: block;
+  animation: fadeIn 0.4s ease;
 }
 
-/* Buttons */
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
 .button {
   display: inline-block;
   padding: 10px 15px;
@@ -82,14 +116,20 @@ body {
   color: inherit;
 }
 
-/* Events */
+/* =========================
+   EVENTS
+   ========================= */
+
 .event {
   margin-bottom: 30px;
   border-bottom: 1px solid;
   padding-bottom: 10px;
 }
 
-/* Typography */
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
 h1 {
   font-size: 32px;
   font-weight: 400;
@@ -111,7 +151,51 @@ h1, h2 {
   text-transform: uppercase;
 }
 
-.panel:nth-child(1) .label { padding-bottom: 400px; }
-.panel:nth-child(2) .label { padding-bottom: 400px; }
-.panel:nth-child(3) .label { padding-bottom: 450px; }
-.panel:nth-child(4) .label { padding-bottom: 430px; }
+/* =========================
+   WEBSHOP PAGE
+   ========================= */
+
+.shop-page {
+  background: black;
+  color: white;
+  overflow: auto;
+}
+
+.shop-header {
+  padding: 40px;
+  border-bottom: 1px solid white;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 40px;
+}
+
+.shop-item {
+  border: 1px solid white;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.shop-item:hover {
+  background: white;
+  color: black;
+}
+
+.shop-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.shop-item h3 {
+  margin: 10px 0 5px 0;
+}
+
+.shop-item p {
+  margin: 5px 0 15px 0;
+}
