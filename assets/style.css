@@ -32,12 +32,12 @@ body {
   background: white;
   color: black;
   display: flex;
-  align-items: center;        /* keep horizontal centering correct */
+  align-items: center;       
   justify-content: center;
-  padding-top: 10px;         /* 👈 pushes text downward */
+  padding-bottom: 200px;       
   cursor: pointer;
   writing-mode: vertical-rl;
-  transform: rotate(180deg);  /* 👈 keep rotation here */
+  transform: rotate(180deg); 
   font-family: 'Oswald', sans-serif;
   font-size: 18px;
   letter-spacing: 3px;
