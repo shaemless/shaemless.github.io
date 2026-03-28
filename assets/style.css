@@ -34,7 +34,7 @@ body {
   display: flex;
   align-items: center;       
   justify-content: center;
-  padding-bottom: 200px;       
+  padding-bottom: 0px;       
   cursor: pointer;
   writing-mode: vertical-rl;
   transform: rotate(180deg); 
@@ -110,3 +110,8 @@ p {
 h1, h2 {
   text-transform: uppercase;
 }
+
+.panel:nth-child(1) .label { padding-bottom: 400px; }
+.panel:nth-child(2) .label { padding-bottom: 400px; }
+.panel:nth-child(3) .label { padding-bottom: 450px; }
+.panel:nth-child(4) .label { padding-bottom: 430px; }
