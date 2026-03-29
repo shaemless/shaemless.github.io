@@ -245,3 +245,25 @@ h1, h2 {
 .contact-form .button {
   align-self: flex-start;
 }
+
+#events-list {
+  margin-top: 20px;
+}
+
+.event-item {
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.event-link {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  display: block;
+  transition: 0.2s;
+}
+
+.event-link:hover {
+  color: #aaa;
+}
