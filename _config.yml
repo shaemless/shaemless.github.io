@@ -6,6 +6,13 @@ url: "https://shaemless.github.io"
 collections:
   events:
     output: true
-    permalink: /events/
+    permalink: /events/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: events
+    values:
+      layout: event
 
 markdown: kramdown

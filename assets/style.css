@@ -199,3 +199,49 @@ h1, h2 {
 .shop-item p {
   margin: 5px 0 15px 0;
 }
+
+/* =========================
+   CONTACT FORM (FIXED LAYOUT)
+   ========================= */
+
+.contact-form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;              /* space between fields */
+}
+
+/* Each field block */
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* Inputs and textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid black;
+  background: white;
+  color: black;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;   /* ensures equal width */
+}
+
+/* Focus effect (nice aesthetic touch) */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  background: black;
+  color: white;
+}
+
+/* Button alignment */
+.contact-form .button {
+  align-self: flex-start;
+}
