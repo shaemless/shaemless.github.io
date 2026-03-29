@@ -30,42 +30,16 @@
     </div>
     <div class="content">
       <h2>Shows</h2>
-
-      <div id="events-list"></div>
-
-      <script>
-      fetch("events.json")
-        .then(response => response.json())
-        .then(events => {
-          // Sort by date (newest first)
-          events.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-          let container = document.getElementById("events-list");
-
-          events.forEach(event => {
-            let item = document.createElement("div");
-            item.className = "event-item";
-
-            item.innerHTML = `
-              <a href="${event.link}" class="event-link">
-                <strong>${event.title}</strong><br>
-                ${formatDate(event.date)} — ${event.location}
-              </a>
-            `;
-
-            container.appendChild(item);
-          });
-        });
-
-      function formatDate(dateString) {
-        let date = new Date(dateString);
-        return date.toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric"
-        });
-      }
-      </script>
+      {% assign sorted_events = site.events | sort: "date" | reverse %}
+      {% for event in sorted_events %}
+        <div class="event">
+          <p>
+            <strong>{{ event.title }}</strong><br>
+            {{ event.date | date: "%d %b %Y" }}<br>
+            {{ event.location }}
+          </p>
+        </div>
+      {% endfor %}
 
     </div>
   </div>
