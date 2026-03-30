@@ -7,7 +7,7 @@ body {
   font-family: 'Space Grotesk', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  overflow: hidden; /* prevents full page scrolling */
+  overflow: hidden;
 }
 
 /* =========================
@@ -20,24 +20,24 @@ body {
   width: 100vw;
 }
 
-/* Each vertical panel */
+/* =========================
+   PANELS
+   ========================= */
+
 .panel {
   display: flex;
   height: 100%;
-  width: 80px; /* collapsed width */
+  width: 80px;
+  min-width: 80px;
+  overflow: hidden;              /* CRITICAL FIX */
   transition: all 0.5s ease;
 }
 
-/* Expanded panel */
 .panel.active {
-  width: calc(100vw - 240px); /* remaining width when opened */
+  width: calc(100vw - 240px);
 }
 
-/* Hide label only when first panel is open */
-.panel:first-child .label {
-  transition: all 0.5s ease;
-}
-
+/* Hide label when first panel is open */
 .panel:first-child.active .label {
   transform: translateX(-80px);
   opacity: 0;
@@ -45,7 +45,7 @@ body {
 }
 
 /* =========================
-   PANEL LABEL (VERTICAL TEXT)
+   LABEL
    ========================= */
 
 .label {
@@ -57,7 +57,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Vertical text */
 .label span {
   position: absolute;
   bottom: 10px;
@@ -66,15 +65,11 @@ body {
   writing-mode: vertical-rl;
   font-family: 'Oswald', sans-serif;
   font-size: 70px;
-  font-weight: 1000; 
-  letter-spacing: 0px;
+  font-weight: 700;
 }
 
-/* Hover + active states */
-.label:hover {
-  background: black;
-}
-
+/* Hover + active */
+.label:hover,
 .panel.active .label {
   background: black;
 }
@@ -85,16 +80,65 @@ body {
 }
 
 /* =========================
-   PANEL CONTENT AREA
+   CONTENT
    ========================= */
 
+/* CONTENT */
 .content {
   flex: 1;
-  padding: 40px;      /* space inside panel */
-  overflow-y: auto;   /* allows scrolling inside panel */
+  padding: 40px;
+  overflow-y: auto;
   display: none;
   background: white;
   color: black;
+}
+
+/* HOMEPAGE CONTENT — NO WHITE BACKGROUND */
+.home-panel .content {
+  background: transparent;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+/* IMPORTANT: default = block */
+.panel.active .content {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+
+/* =========================
+   NON-HOMEPAGE PANEL BACKGROUND
+   ========================= */
+
+/* Apply background image to all panels except the homepage */
+.panel:not(.home-panel) .content {
+  position: relative; /* required for overlay */
+  background: url('/images/Background_grey.png') center/cover no-repeat;
+  background-size: cover;   /* fill the panel */
+  color: white;             /* ensure text is readable */
+  padding: 40px;            /* same as before */
+  overflow-y: auto;         /* scrollable content */
+  display: none;            /* accordion default behavior */
+  transition: all 0.3s ease;
+}
+
+/* Dark overlay for better text contrast */
+.panel:not(.home-panel) .content::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* semi-transparent black overlay */
+  z-index: 0;
+}
+
+/* Ensure panel content is above overlay */
+.panel:not(.home-panel) .content > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Show content when panel is active */
@@ -103,63 +147,183 @@ body {
   animation: fadeIn 0.4s ease;
 }
 
-/* Fade animation */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* =========================
+   HOME PANEL BACKGROUND
+   ========================= */
+
+/* DISTORTED FLICKER */
+@keyframes flicker-distort {
+  0%   { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1) contrast(1); opacity: 1; }
+
+  10%  { transform: scale(1.05) translate(-15px, 8px) skew(-2deg); filter: brightness(0.6) contrast(1.6); opacity: 0.8; }
+  12%  { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1); opacity: 1; }
+
+  20%  { transform: scale(1.08) translate(20px, -10px) skew(3deg); filter: brightness(1.4) contrast(0.8); }
+  22%  { transform: scale(1) translate(0,0) skew(0deg); }
+
+  35%  { transform: scale(1.1) translate(-25px, 15px) skew(-4deg); filter: brightness(0.5) contrast(1.8) blur(2px); opacity: 0.7; }
+  36%  { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1); opacity: 1; }
+
+  50%  { transform: scale(1.06) translate(10px, -20px) skew(2deg); }
+
+  70%  { transform: scale(1.12) translate(-30px, 10px) skew(-3deg); filter: brightness(0.7) contrast(1.5); }
+  72%  { transform: scale(1) translate(0,0) skew(0deg); }
+
+  85%  { transform: scale(1.05) translate(15px, 5px) skew(1deg); }
+
+  100% { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1); opacity: 1; }
+}
+
+.home-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background image layer */
+.home-panel::before {
+  content: "";
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  top: -10%;
+  left: -10%;
+  background: url('/images/Color_img.png') center/cover no-repeat;
+  z-index: 0;
+  animation: flicker-distort 0.8s infinite;
+  pointer-events: none;
+}
+
+.home-panel::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('/images/Color_img.png') center/cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.15;
+  animation: glitch-shift 3s infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes glitch-shift {
+  0%   { transform: translate(0,0); }
+  20%  { transform: translate(-3px, 1px); }
+  40%  { transform: translate(3px, -1px); }
+  60%  { transform: translate(-2px, 0); }
+  80%  { transform: translate(2px, 1px); }
+  100% { transform: translate(0,0); }
+}
+
+/* Keep content above background */
+.home-panel .content {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  color: white;
+}
+
+/* Only center content WHEN ACTIVE */
+.panel.active .home-content {
+  display: flex;
+  flex-direction: column;   /* stack image + button */
+  justify-content: center;
+  align-items: center;
+  gap: 30px;                /* space between image and button */
+  height: 100%;
+}
+
+.home-image {
+  max-width: 400px;     /* control size */
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: 0.3s;
+}
+
+/* Hover effect (nice subtle interaction) */
+.home-link:hover .home-image {
+  transform: scale(1.03);
+  opacity: 1;
 }
 
 /* =========================
-   BUTTONS
+   FOLLOW US BUTTON
    ========================= */
 
-.button {
-  display: inline-block;
-  padding: 10px 15px;
-  border: 1px solid;
-  text-decoration: none;
-  margin-top: 10px;
-  color: inherit;
+/* Make link wrapping h2 not underlined */
+.follow-us-link {
+  text-decoration: none; /* remove underline */
+}
+
+.follow-us-link h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: white;        /* normal text color */
+  transition: color 0.3s;
+}
+
+/* Hover effect */
+.follow-us-link:hover h2 {
+  color: black;      /* hover color */
+  cursor: pointer;
 }
 
 /* =========================
-   EVENTS — CLEAN LIST
+   EVENTS
    ========================= */
+
+/* Make event blocks clickable */
+.event-link {
+  text-decoration: none;   /* remove underline */
+  color: inherit;          /* keep black text */
+  display: block;          /* ensures full clickable area */
+}
 
 .event {
-  margin-bottom: 14px;          /* space between events */
-  padding-bottom: 8px;          /* space above separator */
+  margin-bottom: 18px;
+  padding-bottom: 8px;
   border-bottom: 1px solid black;
+  transition: background 0.3s, color 0.3s;  /* smooth hover */
 }
 
-/* Remove separator from last item */
 .event:last-child {
   border-bottom: none;
 }
 
-/* Title */
 .event-title {
   font-size: 16px;
   font-weight: 700;
   line-height: 1.1;
-  margin: 0;
 }
 
-/* Date */
-.event-date {
-  font-size: 14px;
-  line-height: 1.1;
-  margin: 0;
-  color: #444;
-}
-
-/* Location */
+.event-date,
 .event-location {
   font-size: 14px;
-  line-height: 1.1;
-  margin: 0;
-  color: #444;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.806);
 }
+
+/* Hover effect: make everything white */
+.event-link:hover .event {
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+.event-link:hover .event-date,
+.event-link:hover .event-location {
+  color: white;
+}
+
+/* Smooth color transitions */
+.event,
+.event-date,
+.event-location {
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
 
 /* =========================
    TYPOGRAPHY
@@ -174,7 +338,7 @@ h1 {
 h2 {
   font-size: 22px;
   font-weight: 400;
-  margin-bottom: 30px; /* space under section title */
+  margin-bottom: 30px;
 }
 
 p {
@@ -188,98 +352,7 @@ h1, h2 {
 }
 
 /* =========================
-   WEBSHOP PAGE
-   ========================= */
-
-.shop-page {
-  background: black;
-  color: white;
-  overflow: auto;
-}
-
-.shop-header {
-  padding: 40px;
-  border-bottom: 1px solid white;
-}
-
-.shop-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  padding: 40px;
-}
-
-.shop-item {
-  border: 1px solid white;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.shop-item:hover {
-  background: white;
-  color: black;
-}
-
-.shop-item img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  margin-bottom: 15px;
-}
-
-.shop-item h3 {
-  margin: 10px 0 5px 0;
-}
-
-.shop-item p {
-  margin: 5px 0 15px 0;
-}
-
-/* =========================
-   CONTACT FORM
-   ========================= */
-
-.contact-form {
-  max-width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* space between fields */
-}
-
-.contact-form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border: 1px solid black;
-  background: white;
-  color: black;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  background: black;
-  color: white;
-}
-
-.contact-form .button {
-  align-self: flex-start;
-}
-
-/* =========================
-   CONTACT INFO BLOCKS
+   CONTACT
    ========================= */
 
 .contact-info {
@@ -298,12 +371,145 @@ h1, h2 {
 
 .contact-title {
   font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-size: 16px;
+  margin: 25px 0 10px;
 }
 
 .contact-line {
   font-size: 13px;
   line-height: 1.4;
   text-transform: none;
+}
+
+/* =========================
+   FORM
+   ========================= */
+
+.contact-form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid black;
+  background: white;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  background: black;
+  color: white;
+}
+
+.contact-form button { 
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 5px;
+  border: none;
+  background: white;
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block; /* makes button take full width */
+  width: 100%; /* matches the form width */
+  box-sizing: border-box; /* ensures padding + border stay inside width */ 
+} 
+
+.contact-form button:hover { 
+  background: black;
+  color: white;
+  border-color: white; }
+
+/* =========================
+   ANIMATION
+   ========================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================
+   WEBSHOP
+   ========================= */
+
+.shop-page {
+  background: black;
+  color: white;
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Header */
+.shop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.shop-header h1 {
+  font-size: 40px;
+  margin: 0;
+}
+
+/* Grid layout */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+/* Items */
+.shop-item {
+  border: 1px solid white;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.shop-item:hover {
+  background: white;
+  color: black;
+}
+
+/* Images */
+.shop-item img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: currentColor;
+  color: black;
 }
