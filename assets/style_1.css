@@ -7,8 +7,8 @@ body {
   font-family: 'Space Grotesk', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-  overflow-x: hidden;   /* only block horizontal */
-  overflow-y: auto;     /* allow vertical scroll */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* =========================
@@ -17,8 +17,8 @@ body {
 
 .accordion {
   display: flex;
-  height: 100vh;   /* fallback */
-  height: 100svh;  /* mobile fix */
+  height: 100vh;
+  height: 100svh;
   width: 100vw;
 }
 
@@ -31,7 +31,7 @@ body {
   height: 100%;
   width: 80px;
   min-width: 80px;
-  overflow: hidden;              /* CRITICAL FIX */
+  overflow: hidden;
   transition: all 0.5s ease;
 }
 
@@ -85,7 +85,6 @@ body {
    CONTENT
    ========================= */
 
-/* CONTENT */
 .content {
   flex: 1;
   padding: 40px;
@@ -95,197 +94,72 @@ body {
   color: black;
 }
 
-/* HOMEPAGE CONTENT — NO WHITE BACKGROUND */
-.home-panel .content {
-  background: transparent;
-  color: white;
-  position: relative;
-  z-index: 2;
-}
-
-/* IMPORTANT: default = block */
-.panel.active .content {
-  display: block;
-  animation: fadeIn 0.4s ease;
-}
-
-
-/* =========================
-   NON-HOMEPAGE PANEL BACKGROUND
-   ========================= */
-
-/* Apply background image to all panels except the homepage */
-.panel:not(.home-panel) .content {
-  position: relative; /* required for overlay */
-  background: url('/images/Background_grey.png') center/cover no-repeat;
-  background-size: cover;   /* fill the panel */
-  color: white;             /* ensure text is readable */
-  padding: 40px;            /* same as before */
-  overflow-y: auto;         /* scrollable content */
-  display: none;            /* accordion default behavior */
-  transition: all 0.3s ease;
-}
-
-/* Dark overlay for better text contrast */
-.panel:not(.home-panel) .content::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0); /* semi-transparent black overlay */
-  z-index: 0;
-}
-
-/* Ensure panel content is above overlay */
-.panel:not(.home-panel) .content > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Show content when panel is active */
 .panel.active .content {
   display: block;
   animation: fadeIn 0.4s ease;
 }
 
 /* =========================
-  HOMEPANEL: Chaos background
-  ========================= */
-
-/* DISTORTED FLICKER */
-/*
-@keyframes flicker-distort {
-  0%   { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1) contrast(1); opacity: 1; }
-
-  10%  { transform: scale(1.05) translate(-15px, 8px) skew(-2deg); filter: brightness(0.6) contrast(1.6); opacity: 0.8; }
-  12%  { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1); opacity: 1; }
-
-  20%  { transform: scale(1.08) translate(20px, -10px) skew(3deg); filter: brightness(1.4) contrast(0.8); }
-  22%  { transform: scale(1) translate(0,0) skew(0deg); }
-
-  35%  { transform: scale(1.1) translate(-25px, 15px) skew(-4deg); filter: brightness(0.5) contrast(1.8) blur(2px); opacity: 0.7; }
-  36%  { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1); opacity: 1; }
-
-  50%  { transform: scale(1.06) translate(10px, -20px) skew(2deg); }
-
-  70%  { transform: scale(1.12) translate(-30px, 10px) skew(-3deg); filter: brightness(0.7) contrast(1.5); }
-  72%  { transform: scale(1) translate(0,0) skew(0deg); }
-
-  85%  { transform: scale(1.05) translate(15px, 5px) skew(1deg); }
-
-  100% { transform: scale(1) translate(0,0) skew(0deg); filter: brightness(1); opacity: 1; }
-}
-
-.home-panel {
-  position: relative;
-  overflow: hidden;
-}
-
-.home-panel::before {
-  content: "";
-  position: absolute;
-  width: 110%;
-  height: 110%;
-  top: -10%;
-  left: -10%;
-  background: url('/images/Color_img.png') center/cover no-repeat;
-  z-index: 0;
-  animation: flicker-distort 0.8s infinite;
-  pointer-events: none;
-}
-
-.home-panel::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url('/images/Color_img.png') center/cover no-repeat;
-  mix-blend-mode: screen;
-  opacity: 0.15;
-  animation: glitch-shift 3s infinite;
-  z-index: 1;
-  pointer-events: none;
-}
-
-@keyframes glitch-shift {
-  0%   { transform: translate(0,0); }
-  20%  { transform: translate(-3px, 1px); }
-  40%  { transform: translate(3px, -1px); }
-  60%  { transform: translate(-2px, 0); }
-  80%  { transform: translate(2px, 1px); }
-  100% { transform: translate(0,0); }
-}
+   HOMEPAGE (STACKED IMAGES)
+   ========================= */
 
 .home-panel .content {
-  position: relative;
-  z-index: 2;
-  background: transparent;
+  background: white;
   color: white;
 }
-
-.panel.active .home-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  height: 100%;
-}
-
-.home-image {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: 0.3s;
-}
-
-.home-link:hover .home-image {
-  transform: scale(1.03);
-  opacity: 1;
-}
-/*
-
-/* =========================
-   HOMEPANEL: Ride deep background
-   ========================= */
 
 .home-images {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1vh;
+  justify-content: center;  /* center vertically */
+  gap: 1vh;                 /* spacing scales with screen */
   height: 100%;
 }
 
 .home-image {
-  max-height: 18vh;
+  max-height: 18vh;   /* each image takes ~1/5 of screen */
   width: auto;
   height: auto;
+}
+
+/* =========================
+   NON-HOMEPAGE PANEL BACKGROUND
+   ========================= */
+
+.panel:not(.home-panel) .content {
+  position: relative;
+  background: url('/images/Background_grey.png') center/cover no-repeat;
+  color: white;
+  padding: 40px;
+  overflow-y: auto;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.panel:not(.home-panel) .content > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================
    FOLLOW US BUTTON
    ========================= */
 
-/* Make link wrapping h2 not underlined */
 .follow-us-link {
-  text-decoration: none; /* remove underline */
+  text-decoration: none;
 }
 
 .follow-us-link h2 {
   font-family: 'Oswald', sans-serif;
   font-size: 28px;
   text-transform: uppercase;
-  color: white;        /* normal text color */
+  color: white;
   transition: color 0.3s;
 }
 
-/* Hover effect */
 .follow-us-link:hover h2 {
-  color: black;      /* hover color */
+  color: black;
   cursor: pointer;
 }
 
@@ -293,18 +167,17 @@ body {
    EVENTS
    ========================= */
 
-/* Make event blocks clickable */
 .event-link {
-  text-decoration: none;   /* remove underline */
-  color: inherit;          /* keep black text */
-  display: block;          /* ensures full clickable area */
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .event {
   margin-bottom: 18px;
   padding-bottom: 8px;
-  border-bottom: 1px solid black;
-  transition: background 0.3s, color 0.3s;  /* smooth hover */
+  border-bottom: 1px solid white;
+  transition: background 0.3s, color 0.3s;
 }
 
 .event:last-child {
@@ -321,10 +194,9 @@ body {
 .event-location {
   font-size: 14px;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.806);
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Hover effect: make everything white */
 .event-link:hover .event {
   background: black;
   color: white;
@@ -335,14 +207,6 @@ body {
 .event-link:hover .event-location {
   color: white;
 }
-
-/* Smooth color transitions */
-.event,
-.event-date,
-.event-location {
-  transition: color 0.3s ease, background 0.3s ease;
-}
-
 
 /* =========================
    TYPOGRAPHY
@@ -381,7 +245,7 @@ h1, h2 {
 .contact-block {
   margin-bottom: 25px;
   padding-bottom: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 }
 
 .contact-block:last-child {
@@ -440,21 +304,19 @@ h1, h2 {
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 5px 5px;
+  padding: 5px;
   border: none;
   background: white;
   color: black;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: block; /* makes button take full width */
-  width: 100%; /* matches the form width */
-  box-sizing: border-box; /* ensures padding + border stay inside width */ 
+  width: 100%;
 } 
 
 .contact-form button:hover { 
   background: black;
   color: white;
-  border-color: white; }
+}
 
 /* =========================
    ANIMATION
@@ -475,10 +337,8 @@ h1, h2 {
   min-height: 100vh;
   min-height: 100svh;
   padding: 40px;
-  font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Header */
 .shop-header {
   display: flex;
   justify-content: space-between;
@@ -486,19 +346,12 @@ h1, h2 {
   margin-bottom: 60px;
 }
 
-.shop-header h1 {
-  font-size: 40px;
-  margin: 0;
-}
-
-/* Grid layout */
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
 }
 
-/* Items */
 .shop-item {
   border: 1px solid white;
   padding: 20px;
@@ -511,14 +364,12 @@ h1, h2 {
   color: black;
 }
 
-/* Images */
 .shop-item img {
   width: 100%;
   height: auto;
   margin-bottom: 15px;
 }
 
-/* Buttons */
 .button {
   display: inline-block;
   margin-top: 10px;
@@ -535,7 +386,7 @@ h1, h2 {
 }
 
 /* =========================
-   MOBILE FIX
+   MOBILE
    ========================= */
 
 @media (max-width: 768px) {
@@ -571,8 +422,12 @@ h1, h2 {
   }
 
   .content {
-    display: block;       /* avoid animation glitches */
+    display: block;
     padding: 20px;
+  }
+
+  .home-images {
+    gap: 40px;
   }
 
 }
