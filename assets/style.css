@@ -581,3 +581,19 @@ h1, h2 {
   }
 
 }
+
+/* =========================
+   INSTAGRAM
+   ========================= */
+
+.instagram-row {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.snapwidget-widget {
+  width: 100%;
+  height: 180px; /* controls row height */
+  border: none;
+}
