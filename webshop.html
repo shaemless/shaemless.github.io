@@ -38,6 +38,20 @@
     </div>
 
     <div class="shop-item">
+      <img src="images/Shaemless_shirt.jpg" alt="Shaemless T-Shirt">
+      <h3>Shaemless T-Shirt</h3>
+      <p>€20</p>
+
+      <select id="shirt-size">
+        <option value="S">Small (S)</option>
+        <option value="M">Medium (M)</option>
+        <option value="L">Large (L)</option>
+      </select>
+
+      <button class="button" onclick="buyShirt()">Buy</button>
+    </div>
+
+    <div class="shop-item">
       <img src="images/Support.png" alt="Donation">
       <h3>Support</h3>
       <p>€-</p>
@@ -46,5 +60,18 @@
 
   </div>
 
+<script>
+function buyShirt() {
+  const size = document.getElementById("shirt-size").value;
+
+  const links = {
+    S: "https://buy.stripe.com/YOUR_SMALL_LINK",
+    M: "https://buy.stripe.com/YOUR_MEDIUM_LINK",
+    L: "https://buy.stripe.com/YOUR_LARGE_LINK"
+  };
+
+  window.location.href = links[size];
+}
+</script>
 </body>
 </html>
