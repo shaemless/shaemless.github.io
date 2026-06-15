@@ -3,168 +3,298 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shaemless Links</title>
+  <title>Shaemless — Links</title>
+  <meta name="description" content="Official links for Shaemless — music, videos, merch and socials." />
 
   <style>
+    :root {
+      --bg: #0b0b0d;
+      --bg-soft: #141417;
+      --surface: #18181c;
+      --surface-hover: #232329;
+      --border: #2a2a31;
+      --text: #f5f5f7;
+      --muted: #8a8a93;
+      --accent: #ff3b3b;
+      --accent-soft: rgba(255, 59, 59, 0.12);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f0f0f;
-      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(900px 500px at 50% -10%, rgba(255, 59, 59, 0.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
       width: 100%;
-      max-width: 420px;
-      padding: 25px 18px 40px;
+      max-width: 480px;
+      padding: 48px 20px 56px;
+    }
+
+    /* PROFILE */
+    .profile {
       text-align: center;
+      margin-bottom: 36px;
     }
 
     .profile-pic {
-      width: 110px;
-      height: 110px;
+      width: 104px;
+      height: 104px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #333;
+      border: 2px solid var(--border);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .profile h1 {
+      margin: 16px 0 4px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .profile .subtitle {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* SECTIONS */
+    .section-title {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 32px 4px 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* FEATURED CARD */
+    .featured {
+      background: linear-gradient(180deg, var(--accent-soft), rgba(255, 59, 59, 0.03));
+      border: 1px solid rgba(255, 59, 59, 0.25);
+      border-radius: 18px;
+      padding: 18px 18px 14px;
+    }
+
+    .featured .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
       margin-bottom: 10px;
     }
 
-    h1 {
-      margin: 8px 0 5px;
-      font-size: 22px;
+    .featured .track {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 2px;
     }
 
-    p.subtitle {
-      margin: 0 0 25px;
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    .section-title {
-      text-align: left;
+    .featured .track-sub {
       font-size: 13px;
-      color: #777;
-      margin: 25px 5px 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 14px;
     }
 
+    .streaming-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* LINK BUTTONS */
     .link {
-      display: block;
-      background: #1f1f1f;
-      color: white;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      color: var(--text);
       text-decoration: none;
-      padding: 13px;
-      margin: 10px 0;
-      border-radius: 10px;
-      transition: 0.2s ease;
-      font-weight: 500;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
     }
 
     .link:hover {
-      background: #333;
-      transform: scale(1.02);
+      background: var(--surface-hover);
+      border-color: #3a3a44;
+      transform: translateY(-2px);
     }
 
-    .highlight {
-      background: #2a1f1f;
-      border: 1px solid #ff3b3b33;
+    .link.compact { font-size: 14px; padding: 12px 14px; }
+
+    .stack > * + * { margin-top: 10px; }
+
+    .icon-badge {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .highlight:hover {
-      background: #3a2626;
+    .icon-badge img { width: 22px; height: 22px; display: block; }
+
+    .link .label { flex: 1; min-width: 0; }
+    .link .chevron { color: var(--muted); flex: 0 0 auto; }
+
+    /* CONNECT ROW */
+    .connect {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
     }
 
-    .footer-links a {
-      display: block;
-      color: #aaa;
-      text-decoration: none;
-      padding: 8px;
-      font-size: 14px;
+    .connect a {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s ease, transform 0.18s ease;
     }
 
-    .footer-links a:hover {
-      color: white;
+    .connect a:hover { background: var(--surface-hover); transform: translateY(-2px); }
+
+    .connect .icon-badge {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
+    .connect .icon-badge img { width: 18px; height: 18px; }
 
     .footer {
-      margin-top: 25px;
+      margin-top: 40px;
+      text-align: center;
       font-size: 12px;
-      color: #666;
+      color: #5c5c66;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <main class="container">
 
     <!-- PROFILE -->
-    <img class="profile-pic" src="profile.jpg" alt="Shaemless" />
-    <h1>Shaemless</h1>
-    <p class="subtitle">Music & Projects</p>
+    <header class="profile">
+      <img class="profile-pic" src="profile.jpg" alt="Shaemless profile" />
+      <h1>Shaemless</h1>
+      <p class="subtitle">Music &amp; Projects</p>
+    </header>
 
     <!-- FEATURED -->
-    <div class="section-title">Featured</div>
+    <h2 class="section-title">Featured</h2>
+    <section class="featured">
+      <span class="badge">New Single</span>
+      <p class="track">Don&rsquo;t Care, Health Care</p>
+      <p class="track-sub">Stream it now on your platform of choice</p>
 
-    <a class="link highlight">
-      Don’t Care, Health Care – New Single<br/>
-      Listen on:
-    </a>
+      <div class="streaming-grid">
+        <a class="link compact" href="https://music.apple.com/us/album/_/1868857818?app=music&at=1000lHKX&ct=linktree_http&i=1868857819&itscg=30200&itsct=lt_m&ls=1&mt=1" target="_blank" rel="noopener">
+          <span class="icon-badge"><img src="https://thesvg.org/icons/apple-music/default.svg" alt="" /></span>
+          <span class="label">Apple Music</span>
+        </a>
 
-    <a class="link" href="https://music.apple.com/us/album/_/1868857818?app=music&at=1000lHKX&ct=linktree_http&i=1868857819&itscg=30200&itsct=lt_m&ls=1&mt=1" target="_blank">
-      Apple Music
-    </a>
+        <a class="link compact" href="https://open.spotify.com/track/3PWoPiXtDkkDNsrJih2CuE?si=_NnZw64gTVe3AzLzg3aTDQ&utm_medium=share&utm_source=linktree" target="_blank" rel="noopener">
+          <span class="icon-badge"><img src="https://thesvg.org/icons/spotify/default.svg" alt="" /></span>
+          <span class="label">Spotify</span>
+        </a>
 
-    <a class="link" href="https://open.spotify.com/track/3PWoPiXtDkkDNsrJih2CuE?si=_NnZw64gTVe3AzLzg3aTDQ&utm_medium=share&utm_source=linktree" target="_blank">
-      Spotify
-    </a>
+        <a class="link compact" href="https://soundcloud.com/shaemlessband/2-don_t-care-health-care-2?utm_medium=api&utm_campaign=social_sharing&utm_source=id_314547" target="_blank" rel="noopener">
+          <span class="icon-badge"><img src="https://thesvg.org/icons/soundcloud/default.svg" alt="" /></span>
+          <span class="label">SoundCloud</span>
+        </a>
 
-    <a class="link" href="https://soundcloud.com/shaemlessband/2-don_t-care-health-care-2?utm_medium=api&utm_campaign=social_sharing&utm_source=id_314547" target="_blank">
-      SoundCloud
-    </a>
+        <a class="link compact" href="https://www.youtube.com/watch?v=lEZjDLjvt9Y" target="_blank" rel="noopener">
+          <span class="icon-badge"><img src="https://thesvg.org/icons/youtube/default.svg" alt="" /></span>
+          <span class="label">YouTube</span>
+        </a>
 
-    <a class="link" href="https://www.youtube.com/watch?v=lEZjDLjvt9Y" target="_blank">
-      YouTube
-    </a>
+        <a class="link compact" href="https://listen.tidal.com/track/489514999" target="_blank" rel="noopener">
+          <span class="icon-badge"><img src="https://thesvg.org/icons/tidal/default.svg" alt="" /></span>
+          <span class="label">Tidal</span>
+        </a>
+      </div>
+    </section>
 
-    <a class="link" href="https://listen.tidal.com/track/489514999" target="_blank">
-      Tidal
-    </a>
+    <!-- VIDEOS -->
+    <h2 class="section-title">Videos</h2>
+    <div class="stack">
+      <a class="link" href="https://www.youtube.com/watch?v=eKK_NBDF5ek&feature=youtu.be" target="_blank" rel="noopener">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/youtube/default.svg" alt="" /></span>
+        <span class="label">Shaemless Pool Session (Live)</span>
+        <span class="chevron" aria-hidden="true">&rsaquo;</span>
+      </a>
 
-    <div class="section-title">Videos</div>
-
-    <a class="link" href="https://www.youtube.com/watch?v=eKK_NBDF5ek&feature=youtu.be" target="_blank">
-      Shaemless Pool Session (Live)
-    </a>
-
-    <a class="link" href="https://www.youtube.com/watch?app=desktop&v=D-RqNuE00vY" target="_blank">
-      White Statues X Valkhof Festival (Video)
-    </a>
-
-    <div class="section-title">Shop</div>
-
-    <a class="link" href="https://ae-e-store-2.myshopify.com/" target="_blank">
-      Shaemless Webshop
-    </a>
-
-    <!-- FOOTER SOCIAL LINKS -->
-    <div class="section-title">Connect</div>
-
-    <div class="footer-links">
-      <a href="https://open.spotify.com/artist/5dfvfipdrOjnPtb7qtSAct" target="_blank">Spotify</a>
-      <a href="https://www.instagram.com/shaemlessofficial" target="_blank">Instagram</a>
-      <a href="https://www.facebook.com/shaemlessband" target="_blank">Facebook</a>
-      <a href="https://www.youtube.com/channel/UCyRE_hm4MhpTeI687_YwXAw" target="_blank">YouTube</a>
-      <a href="mailto:shaemless@gmail.com">Email</a>
+      <a class="link" href="https://www.youtube.com/watch?app=desktop&v=D-RqNuE00vY" target="_blank" rel="noopener">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/youtube/default.svg" alt="" /></span>
+        <span class="label">White Statues X Valkhof Festival</span>
+        <span class="chevron" aria-hidden="true">&rsaquo;</span>
+      </a>
     </div>
 
-    <div class="footer">
-      © 2026 Shaemless
+    <!-- SHOP -->
+    <h2 class="section-title">Shop</h2>
+    <div class="stack">
+      <a class="link" href="https://ae-e-store-2.myshopify.com/" target="_blank" rel="noopener">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/shopify/default.svg" alt="" /></span>
+        <span class="label">Shaemless Webshop</span>
+        <span class="chevron" aria-hidden="true">&rsaquo;</span>
+      </a>
     </div>
 
-  </div>
+    <!-- CONNECT -->
+    <h2 class="section-title">Connect</h2>
+    <nav class="connect" aria-label="Social links">
+      <a href="https://open.spotify.com/artist/5dfvfipdrOjnPtb7qtSAct" target="_blank" rel="noopener" aria-label="Spotify">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/spotify/default.svg" alt="" /></span>
+      </a>
+      <a href="https://www.instagram.com/shaemlessofficial" target="_blank" rel="noopener" aria-label="Instagram">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/instagram/default.svg" alt="" /></span>
+      </a>
+      <a href="https://www.facebook.com/shaemlessband" target="_blank" rel="noopener" aria-label="Facebook">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/facebook/default.svg" alt="" /></span>
+      </a>
+      <a href="https://www.youtube.com/channel/UCyRE_hm4MhpTeI687_YwXAw" target="_blank" rel="noopener" aria-label="YouTube">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/youtube/default.svg" alt="" /></span>
+      </a>
+      <a href="mailto:shaemless@gmail.com" aria-label="Email">
+        <span class="icon-badge"><img src="https://thesvg.org/icons/gmail/default.svg" alt="" /></span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      &copy; 2026 Shaemless
+    </footer>
+
+  </main>
 </body>
 </html>
