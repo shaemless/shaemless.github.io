@@ -158,6 +158,10 @@
 
     .icon-badge img { width: 22px; height: 22px; display: block; }
 
+    /* Some brand marks ship as a white glyph — give them a colored badge so they stay visible */
+    .icon-badge.on-soundcloud { background: #ff5500; }
+    .icon-badge.on-tidal { background: #000000; }
+
     .link .label { flex: 1; min-width: 0; }
     .link .chevron { color: var(--muted); flex: 0 0 auto; }
 
@@ -205,9 +209,8 @@
 
     <!-- PROFILE -->
     <header class="profile">
-      <img class="profile-pic" src="profile.jpg" alt="Shaemless profile" />
+      <img class="profile-pic" src="images/RD_front.jpeg" alt="Shaemless profile" />
       <h1>Shaemless</h1>
-      <p class="subtitle">Music &amp; Projects</p>
     </header>
 
     <!-- FEATURED -->
@@ -229,7 +232,7 @@
         </a>
 
         <a class="link compact" href="https://soundcloud.com/shaemlessband/2-don_t-care-health-care-2?utm_medium=api&utm_campaign=social_sharing&utm_source=id_314547" target="_blank" rel="noopener">
-          <span class="icon-badge"><img src="https://thesvg.org/icons/soundcloud/default.svg" alt="" /></span>
+          <span class="icon-badge on-soundcloud"><img src="https://thesvg.org/icons/soundcloud/default.svg" alt="" /></span>
           <span class="label">SoundCloud</span>
         </a>
 
@@ -239,7 +242,7 @@
         </a>
 
         <a class="link compact" href="https://listen.tidal.com/track/489514999" target="_blank" rel="noopener">
-          <span class="icon-badge"><img src="https://thesvg.org/icons/tidal/default.svg" alt="" /></span>
+          <span class="icon-badge on-tidal"><img src="https://thesvg.org/icons/tidal/default.svg" alt="" /></span>
           <span class="label">Tidal</span>
         </a>
       </div>
